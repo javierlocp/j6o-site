@@ -19,6 +19,6 @@ export const postAsset = (slug: string, file: string) =>
 export const explorationAsset = (slug: string, file: string) =>
   contentAsset("explorations", slug, file);
 
-// Optional: simple detector you can reuse anywhere
+// Simple video detector
 export const isVideoSrc = (src: string) =>
   /\.(mp4|webm|ogg|mov|m4v)$/i.test(src);

@@ -5,10 +5,13 @@ import { explorationAsset } from "@/lib/media";
 
 /** @typedef {{
  *   title: string;
+ *   slug: string;
  *   images: string[];
+ *   wip?: boolean;
  *   poster?: string;
  *   visit?: { href: string; label?: string };
- *   wip?: boolean;
+ *   tags?: string[];
+ *   description?: string;
  * }} Exploration
  */
 
@@ -23,20 +26,23 @@ export const explorations = [
       explorationAsset("doremi", "doremi-hero.png"),
       explorationAsset("doremi", "doremi-feature.png"),
     ],
+    slug: "doremi",
     wip: true, // WIP tag
     visit: { href: "https://doremi-landing-ui.vercel.app/", label: "Visit" }, // With Visit Link
   },
   {
     title: "Custom Icons",
-    images: [explorationAsset("design-exp", "pixel-icon.png")],
+    slug: "misc",
+    images: [explorationAsset("misc", "pixel-icon.png")],
   },
   {
     title: "Micro-animation, Interaction",
-    images: [explorationAsset("ai", "manus.mp4")],
-    poster: [explorationAsset("ai", "motion.png")],
+    slug: "micro-animation",
+    images: [explorationAsset("micro-animation", "manus.mp4")],
   },
   {
     title: "Chatter.sh, Side Project, Concept",
+    slug: "chatter",
     images: [
       explorationAsset("chatter", "dashboard.png"),
       explorationAsset("chatter", "cluster-details.png"),

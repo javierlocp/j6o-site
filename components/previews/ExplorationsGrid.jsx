@@ -1,7 +1,8 @@
-import LightBoxModal from "../modals/LightBoxModal"; //import directly from barrel file
+import Image from "next/image";
 import { getExplorations } from "@/content/explorations/data";
 import { isVideoSrc } from "@/lib/media";
-import { useEffect, useRef, useState } from "react";
+import LightBoxModal from "@/components/modals/LightBoxModal";
+import { useState, useRef, useEffect } from "react";
 
 const thumbs = getExplorations();
 
@@ -100,9 +101,9 @@ export default function ExplorationsGrid() {
   const [projectIndex, setProjectIndex] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
 
-  const openAt = (pIdx, imgIdx = 0) => {
-    setProjectIndex(pIdx);
-    setImageIndex(imgIdx);
+  const openAt = (projectIdx, imageIdx = 0) => {
+    setProjectIndex(projectIdx);
+    setImageIndex(imageIdx);
     setOpen(true);
   };
 
@@ -144,8 +145,8 @@ export default function ExplorationsGrid() {
 
       <div className="columns-1 gap-2.5 [column-fill:balance]">
         {thumbs.map((t, idx) => {
-          const first = t.images[0];
-          const video = isVideoSrc(first);
+          const firstMedia = t.images[0];
+          const video = isVideoSrc(firstMedia);
 
           return (
             <div key={t.title} className="relative mb-2 break-inside-avoid">
@@ -157,16 +158,17 @@ export default function ExplorationsGrid() {
               >
                 {video ? (
                   <VideoThumb
-                    src={first}
+                    src={firstMedia}
                     className="absolute inset-0 h-full w-full object-contain transition-transform duration-300 ease-out group-hover/thumbnail:scale-[1.02]"
                   />
                 ) : (
-                  <img
-                    src={first}
+                  <Image
+                    src={firstMedia}
                     alt={t.title}
-                    loading="lazy"
-                    decoding="async"
-                    className="absolute inset-0 h-full w-full object-contain transition-transform duration-300 ease-out group-hover/thumbnail:scale-[1.02]"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority={idx < 2} // preloads top items for faster LCP
+                    className="object-contain transition-transform duration-300 ease-out group-hover/thumbnail:scale-[1.02]"
                   />
                 )}
 
