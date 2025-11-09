@@ -6,7 +6,7 @@ import readingTime from "reading-time";
 
 const postsDir = path.join(process.cwd(), "content", "posts");
 
-export const getPostBySlug = (slug) => {
+export const getPostBySlug = (slug: string) => {
   const fullPath = path.join(postsDir, `${slug}.md`);
   if (!fs.existsSync(fullPath)) return null;
 
@@ -40,5 +40,9 @@ export const getAllPosts = () => {
       return post;
     })
     .filter((p) => p && !p.draft) // 🧠 hide drafts
-    .sort((a, b) => new Date(b.date) - new Date(a.date));
+    .sort((a, b) => {
+      const dateA = new Date(a?.date ?? 0).getTime();
+      const dateB = new Date(b?.date ?? 0).getTime();
+      return dateB - dateA;
+    });
 };

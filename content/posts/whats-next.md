@@ -3,7 +3,7 @@ title: What's Next?
 slug: whats-next
 date: 2025-07-01
 excerpt: A living roadmap, a behind-the-scenes note, or a collection of thoughts and code fragments.
-image: /blog/whats-next/whats-next.png
+image: /assets/posts/whats-next/cover.png
 tags: ["design", "process", "fragments"]
 ---
 

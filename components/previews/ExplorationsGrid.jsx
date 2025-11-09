@@ -1,6 +1,9 @@
-import LightBoxModal from '../modals/LightBoxModal'; //import directly from barrel file
-import { explorations as thumbs, isVideo } from '@/explorations';
-import { useEffect, useRef, useState } from 'react';
+import LightBoxModal from "../modals/LightBoxModal"; //import directly from barrel file
+import { getExplorations } from "@/content/explorations/data";
+import { isVideoSrc } from "@/lib/media";
+import { useEffect, useRef, useState } from "react";
+
+const thumbs = getExplorations();
 
 function VideoThumb({ src, className }) {
   const videoRef = useRef(null);
@@ -10,7 +13,7 @@ function VideoThumb({ src, className }) {
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    // Important for iOS Safari: set these before play()
+    // Important for iOS Safari: set these before play()d
     v.muted = true;
     v.playsInline = true;
 
@@ -21,9 +24,9 @@ function VideoThumb({ src, className }) {
     };
 
     if (v.readyState >= 2) tryPlay();
-    else v.addEventListener('canplay', tryPlay, { once: true });
+    else v.addEventListener("canplay", tryPlay, { once: true });
 
-    return () => v.removeEventListener('canplay', tryPlay);
+    return () => v.removeEventListener("canplay", tryPlay);
   }, [src]);
 
   // Pause when not visible; resume when in view
@@ -40,7 +43,7 @@ function VideoThumb({ src, className }) {
           }
         });
       },
-      { rootMargin: '150px' }
+      { rootMargin: "150px" }
     );
     io.observe(v);
     return () => io.disconnect();
@@ -55,19 +58,19 @@ function VideoThumb({ src, className }) {
       if (done) return;
       done = true;
       v.play().catch(() => {});
-      window.removeEventListener('touchstart', kick, true);
-      window.removeEventListener('mousedown', kick, true);
+      window.removeEventListener("touchstart", kick, true);
+      window.removeEventListener("mousedown", kick, true);
     };
-    window.addEventListener('touchstart', kick, true);
-    window.addEventListener('mousedown', kick, true);
+    window.addEventListener("touchstart", kick, true);
+    window.addEventListener("mousedown", kick, true);
     return () => {
-      window.removeEventListener('touchstart', kick, true);
-      window.removeEventListener('mousedown', kick, true);
+      window.removeEventListener("touchstart", kick, true);
+      window.removeEventListener("mousedown", kick, true);
     };
   }, []);
 
   if (failed) {
-    return <div className={className + ' bg-black'} />;
+    return <div className={className + " bg-black"} />;
   }
 
   return (
@@ -78,7 +81,7 @@ function VideoThumb({ src, className }) {
       loop
       playsInline
       preload="auto"
-      className={className + ' bg-black'}
+      className={className + " bg-black"}
       controls={false}
       disableRemotePlayback
       onError={() => setFailed(true)}
@@ -131,7 +134,10 @@ export default function ExplorationsGrid() {
     <section aria-label="Project Preview" className="mb-20">
       <div className="mb-10 flex flex-col">
         <h2 className="mb-4 text-base text-neutral-50">Design & Exploration</h2>
-        <p>Check out some of my side projects and design explorations below, or get in touch if you'd like to read full case studies.</p>
+        <p>
+          Check out some of my side projects and design explorations below, or
+          get in touch if you'd like to read full case studies.
+        </p>
       </div>
 
       {/* Project Gallery Grid */}
@@ -139,7 +145,7 @@ export default function ExplorationsGrid() {
       <div className="columns-1 gap-2.5 [column-fill:balance]">
         {thumbs.map((t, idx) => {
           const first = t.images[0];
-          const video = isVideo(first);
+          const video = isVideoSrc(first);
 
           return (
             <div key={t.title} className="relative mb-2 break-inside-avoid">
@@ -150,7 +156,10 @@ export default function ExplorationsGrid() {
                 aria-label={`Open ${t.title}`}
               >
                 {video ? (
-                  <VideoThumb src={first} className="absolute inset-0 h-full w-full object-contain transition-transform duration-300 ease-out group-hover/thumbnail:scale-[1.02]" />
+                  <VideoThumb
+                    src={first}
+                    className="absolute inset-0 h-full w-full object-contain transition-transform duration-300 ease-out group-hover/thumbnail:scale-[1.02]"
+                  />
                 ) : (
                   <img
                     src={first}
