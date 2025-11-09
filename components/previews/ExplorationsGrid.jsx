@@ -6,7 +6,7 @@ import { useState, useRef, useEffect } from "react";
 
 const thumbs = getExplorations();
 
-function VideoThumb({ src, className }) {
+function VideoThumb({ sources = [], className }) {
   const videoRef = useRef(null);
   const [failed, setFailed] = useState(false);
 
@@ -28,7 +28,7 @@ function VideoThumb({ src, className }) {
     else v.addEventListener("canplay", tryPlay, { once: true });
 
     return () => v.removeEventListener("canplay", tryPlay);
-  }, [src]);
+  }, [sources]);
 
   // Pause when not visible; resume when in view
   useEffect(() => {
@@ -91,7 +91,9 @@ function VideoThumb({ src, className }) {
         if (v) v.play().catch(() => {});
       }}
     >
-      <source src={src} type="video/mp4" />
+      {sources.map((s, i) => (
+        <source key={i} src={s.src} type={s.type} />
+      ))}
     </video>
   );
 }
@@ -108,25 +110,21 @@ export default function ExplorationsGrid() {
   };
 
   const next = () => {
-    const imgs = thumbs[projectIndex].images;
+    const imgs = thumbs[projectIndex].images ?? [];
     if (imgs.length > 1) {
       setImageIndex((prev) => (prev + 1) % imgs.length);
     } else {
-      // Move to next project, wrap around, and open its first image
-      const nextProject = (projectIndex + 1) % thumbs.length;
-      setProjectIndex(nextProject);
+      // no-op if there's only one image or video
       setImageIndex(0);
     }
   };
 
   const prev = () => {
-    const imgs = thumbs[projectIndex].images;
+    const imgs = thumbs[projectIndex].images ?? [];
     if (imgs.length > 1) {
       setImageIndex((prev) => (prev - 1 + imgs.length) % imgs.length);
     } else {
-      // Move to previous project, wrap around, and open its first image
-      const prevProject = (projectIndex - 1 + thumbs.length) % thumbs.length;
-      setProjectIndex(prevProject);
+      // no-op if there's only one image or video
       setImageIndex(0);
     }
   };
@@ -145,8 +143,8 @@ export default function ExplorationsGrid() {
 
       <div className="columns-1 gap-2.5 [column-fill:balance]">
         {thumbs.map((t, idx) => {
-          const firstMedia = t.images[0];
-          const video = isVideoSrc(firstMedia);
+          const firstMedia = t.images?.[0];
+          const hasVideo = !!(t.videos?.hevc || t.videos?.h264);
 
           return (
             <div key={t.title} className="relative mb-2 break-inside-avoid">
@@ -156,12 +154,21 @@ export default function ExplorationsGrid() {
                 className="group/thumbnail relative block aspect-3/2 w-full cursor-pointer overflow-hidden rounded-lg focus:ring-2 focus:ring-white/30 focus:outline-none"
                 aria-label={`Open ${t.title}`}
               >
-                {video ? (
+                {hasVideo ? (
                   <VideoThumb
-                    src={firstMedia}
+                    sources={[
+                      t.videos?.hevc && {
+                        src: t.videos.hevc,
+                        type: "video/mp4; codecs=hevc",
+                      },
+                      t.videos?.h264 && {
+                        src: t.videos.h264,
+                        type: "video/mp4",
+                      },
+                    ].filter(Boolean)}
                     className="absolute inset-0 h-full w-full object-contain transition-transform duration-300 ease-out group-hover/thumbnail:scale-[1.02]"
                   />
-                ) : (
+                ) : firstMedia ? (
                   <Image
                     src={firstMedia}
                     alt={t.title}
@@ -170,6 +177,8 @@ export default function ExplorationsGrid() {
                     priority={idx < 2} // preloads top items for faster LCP
                     className="object-contain transition-transform duration-300 ease-out group-hover/thumbnail:scale-[1.02]"
                   />
+                ) : (
+                  <div className="aspect-3/2 w-full bg-neutral-800" />
                 )}
 
                 {/* hover title */}
@@ -182,16 +191,26 @@ export default function ExplorationsGrid() {
         })}
       </div>
 
-      <LightBoxModal
-        open={open}
-        src={thumbs[projectIndex].images[imageIndex]}
-        alt={thumbs[projectIndex].title}
-        onClose={() => setOpen(false)}
-        onPrev={prev}
-        onNext={next}
-        link={thumbs[projectIndex]?.visit}
-        wip={thumbs[projectIndex]?.wip}
-      />
+      {(() => {
+        const current = thumbs[projectIndex];
+        const currentImage = current.images?.[imageIndex];
+        const currentVideo =
+          current.videos?.h264 || current.videos?.hevc || null;
+        const currentSrc = currentImage || currentVideo || "";
+
+        return (
+          <LightBoxModal
+            open={open}
+            src={currentSrc}
+            alt={current.title}
+            onClose={() => setOpen(false)}
+            onPrev={prev}
+            onNext={next}
+            link={current?.visit}
+            wip={current?.wip}
+          />
+        );
+      })()}
     </section>
   );
 }

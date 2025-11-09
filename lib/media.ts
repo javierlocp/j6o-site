@@ -10,7 +10,15 @@ const join = (parts: string[]) =>
 
 export const contentAsset = (kind: AssetKind, slug: string, file: string) => {
   if (!kind || !slug || !file) return "";
-  return join(["assets", kind, slug, file]); // => /assets/kind/slug/file
+  const path = join(["assets", kind, slug, file]); // => /assets/kind/slug/file
+  if (process.env.NODE_ENV === "development") {
+    fetch(path)
+      .then((res) => {
+        if (!res.ok) console.warn(`[Missing asset] ${path}`);
+      })
+      .catch(() => console.warn(`[Asset check failed] ${path}`));
+  }
+  return path;
 };
 
 export const postAsset = (slug: string, file: string) =>

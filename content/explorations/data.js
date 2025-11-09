@@ -6,7 +6,8 @@ import { explorationAsset } from "@/lib/media";
 /** @typedef {{
  *   title: string;
  *   slug: string;
- *   images: string[];
+ *   images?: string[];
+ *   videos?: { hevc?: string; h264?: string };
  *   wip?: boolean;
  *   poster?: string;
  *   visit?: { href: string; label?: string };
@@ -20,12 +21,16 @@ export const explorations = [
   {
     title: "Doremi Finance — Building",
     images: [
-      explorationAsset("doremi", "doremi-landing-vid-v2.mp4"),
+      // explorationAsset("doremi", "optimized-doremi.mp4"),
       explorationAsset("doremi", "doremi-about.png"),
       explorationAsset("doremi", "doremi-compare-fees.png"),
       explorationAsset("doremi", "doremi-hero.png"),
       explorationAsset("doremi", "doremi-feature.png"),
     ],
+    videos: {
+      hevc: explorationAsset("doremi", "doremi-optimized-hevc.mp4"),
+      h264: explorationAsset("doremi", "doremi-optimized-h264.mp4"),
+    },
     slug: "doremi",
     wip: true, // WIP tag
     visit: { href: "https://doremi-landing-ui.vercel.app/", label: "Visit" }, // With Visit Link
@@ -38,7 +43,10 @@ export const explorations = [
   {
     title: "Micro-animation, Interaction",
     slug: "micro-animation",
-    images: [explorationAsset("micro-animation", "manus.mp4")],
+    videos: {
+      hevc: explorationAsset("micro-animation", "manus-optimized-hevc.mp4"),
+      h264: explorationAsset("micro-animation", "manus-optimized-h264.mp4"),
+    },
   },
   {
     title: "Chatter.sh, Side Project, Concept",

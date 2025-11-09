@@ -69,6 +69,12 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${jetbrains.variable} font-sans`}
     >
+      <head>
+        <link rel="preconnect" href="https://app.cal.com" />
+        <link rel="dns-prefetch" href="https://app.cal.com" />
+        <link rel="preconnect" href="https://cloud.umami.is" />
+        <link rel="dns-prefetch" href="https://cloud.umami.is" />
+      </head>
       <body
         className={`${inter.variable} ${jetbrains.variable} antialiased mx-auto max-w-xl px-8 py-12 md:px-6`}
       >
