@@ -8,6 +8,6 @@ export const inter = Inter({
 
 export const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-jetbrains",
+  variable: "--font-jetbrains-mono",
   display: "swap",
 });

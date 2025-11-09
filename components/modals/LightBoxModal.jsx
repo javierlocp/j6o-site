@@ -107,7 +107,7 @@ export default function lightBoxModal({
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
       className={[
-        "fixed inset-0 z-[9999] grid place-items-center", // backdrop fade
+        "fixed inset-0 z-9999 grid place-items-center", // backdrop fade
         "transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
         "bg-zinc-950/80",
         visible ? "opacity-100" : "scale-90 opacity-0",

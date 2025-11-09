@@ -1,6 +1,6 @@
 // app/layout.tsx
 import "@/app/globals.css";
-import { inter, jetbrains } from "@/app/fonts";
+import { inter, jetbrains } from "./fonts";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Script from "next/script";
@@ -64,9 +64,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${inter.variable} ${jetbrains.variable} font-sans`}
+    >
       <body
-        className={`${inter.variable} ${jetbrains.variable} font-inter antialiased mx-auto max-w-xl px-8 py-12 md:px-6`}
+        className={`${inter.variable} ${jetbrains.variable} antialiased mx-auto max-w-xl px-8 py-12 md:px-6`}
       >
         <Navbar />
         <main>{children}</main>
