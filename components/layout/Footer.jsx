@@ -1,4 +1,4 @@
-import ExternalLink from "../ui/ExternalLink";
+import ExternalLink from "../primitives/ExternalLink";
 // Footer Component
 // This is written in arrow function
 const Footer = () => {

@@ -5,7 +5,7 @@ import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import Image from "next/image";
 import "highlight.js/styles/github-dark.css"; // choose your preferred theme
-import BackButton from "@/components/ui/BackButton";
+import BackButton from "@/components/primitives/BackButton";
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
