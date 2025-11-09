@@ -3,7 +3,7 @@ function ExternalLink({ href, children, className = "" }) {
     <a
       href={href}
       target="_blank"
-      rel="noopener"
+      rel="noopener noreferrer"
       className={`${className} inline-block decoration-wavy underline-offset-2 hover:text-neutral-50 hover:underline`}
     >
       {children}
