@@ -1,0 +1,21 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="48" height="48" rx="8" fill="url(#paint0_linear_450_318)"/>
+<path d="M26.2857 40H21.7143V35.4286H26.2857V40Z" fill="#2D2D2D"/>
+<path d="M21.7143 35.4286H17.1429V30.8571H21.7143V35.4286Z" fill="#2D2D2D"/>
+<path d="M30.8571 35.4286H26.2857V30.8571H30.8571V35.4286Z" fill="#2D2D2D"/>
+<path d="M17.1429 30.8571H12.5714V26.2857H17.1429V30.8571Z" fill="#2D2D2D"/>
+<path d="M35.4286 30.8571H30.8571V26.2857H35.4286V30.8571Z" fill="#2D2D2D"/>
+<path d="M12.5714 26.2857H8V21.7143H12.5714V26.2857Z" fill="#2D2D2D"/>
+<path d="M40 26.2857H35.4286V21.7143H40V26.2857Z" fill="#2D2D2D"/>
+<path d="M17.1429 21.7143H12.5714V17.1429H17.1429V21.7143Z" fill="#2D2D2D"/>
+<path d="M35.4286 21.7143H30.8571V17.1429H35.4286V21.7143Z" fill="#2D2D2D"/>
+<path d="M21.7143 17.1429H17.1429V12.5714H21.7143V17.1429Z" fill="#2D2D2D"/>
+<path d="M30.8571 17.1429H26.2857V12.5714H30.8571V17.1429Z" fill="#2D2D2D"/>
+<path d="M26.2857 12.5714H21.7143V8H26.2857V12.5714Z" fill="#2D2D2D"/>
+<defs>
+<linearGradient id="paint0_linear_450_318" x1="24" y1="0" x2="24" y2="48" gradientUnits="userSpaceOnUse">
+<stop stop-color="#E3E3E3"/>
+<stop offset="1" stop-color="white"/>
+</linearGradient>
+</defs>
+</svg>
