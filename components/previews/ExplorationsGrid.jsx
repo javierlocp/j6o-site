@@ -108,22 +108,33 @@ export default function ExplorationsGrid() {
     setOpen(true);
   };
 
+  const getMediaList = (project) => {
+    const list = [];
+    if (project.videos?.h264 || project.videos?.hevc) {
+      list.push(project.videos?.h264 || project.videos?.hevc);
+    }
+    if (project.images?.length) {
+      list.push(...project.images);
+    }
+    return list;
+  };
+
   const next = () => {
-    const imgs = thumbs[projectIndex].images ?? [];
-    if (imgs.length > 1) {
-      setImageIndex((prev) => (prev + 1) % imgs.length);
+    const project = thumbs[projectIndex];
+    const media = getMediaList(project);
+    if (media.length > 1) {
+      setImageIndex((prev) => (prev + 1) % media.length);
     } else {
-      // no-op if there's only one image or video
       setImageIndex(0);
     }
   };
 
   const prev = () => {
-    const imgs = thumbs[projectIndex].images ?? [];
-    if (imgs.length > 1) {
-      setImageIndex((prev) => (prev - 1 + imgs.length) % imgs.length);
+    const project = thumbs[projectIndex];
+    const media = getMediaList(project);
+    if (media.length > 1) {
+      setImageIndex((prev) => (prev - 1 + media.length) % media.length);
     } else {
-      // no-op if there's only one image or video
       setImageIndex(0);
     }
   };
@@ -192,10 +203,11 @@ export default function ExplorationsGrid() {
 
       {(() => {
         const current = thumbs[projectIndex];
-        const currentVideo =
-          current.videos?.h264 || current.videos?.hevc || null;
-        const currentImage = current.images?.[imageIndex];
-        const currentSrc = currentVideo || currentImage || "";
+        const media = getMediaList(current);
+        const currentSrc = media[imageIndex] ?? "";
+        const mediaCount =
+          (current.images?.length ?? 0) + (current.videos ? 1 : 0); // count both image and video presence
+        const hasMultipleMedia = mediaCount > 1;
 
         return (
           <LightBoxModal
@@ -207,6 +219,7 @@ export default function ExplorationsGrid() {
             onNext={next}
             link={current?.visit}
             wip={current?.wip}
+            hasMultipleMedia={hasMultipleMedia}
           />
         );
       })()}
