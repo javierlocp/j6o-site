@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { getAllPosts } from "@/lib/posts";
 
-// This is a component where I import the most recent 4 posts and show it in Home Page.
+// This is a component to import most recent 4 posts and show it in Home Page.
 
 const BlogPreview = () => {
   const [posts, setPosts] = useState([]);

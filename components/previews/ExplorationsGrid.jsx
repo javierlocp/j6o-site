@@ -193,10 +193,10 @@ export default function ExplorationsGrid() {
 
       {(() => {
         const current = thumbs[projectIndex];
-        const currentImage = current.images?.[imageIndex];
         const currentVideo =
           current.videos?.h264 || current.videos?.hevc || null;
-        const currentSrc = currentImage || currentVideo || "";
+        const currentImage = current.images?.[imageIndex];
+        const currentSrc = currentVideo || currentImage || "";
 
         return (
           <LightBoxModal

@@ -21,7 +21,6 @@ export const explorations = [
   {
     title: "Doremi Finance — Building",
     images: [
-      // explorationAsset("doremi", "optimized-doremi.mp4"),
       explorationAsset("doremi", "doremi-about.png"),
       explorationAsset("doremi", "doremi-compare-fees.png"),
       explorationAsset("doremi", "doremi-hero.png"),
