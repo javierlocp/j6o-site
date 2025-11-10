@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { getExplorations } from "@/content/explorations/data";
-import { isVideoSrc } from "@/lib/media";
 import LightBoxModal from "@/components/modals/LightBoxModal";
 import { useState, useRef, useEffect } from "react";
 
