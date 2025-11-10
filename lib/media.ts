@@ -11,12 +11,13 @@ const join = (parts: string[]) =>
 export const contentAsset = (kind: AssetKind, slug: string, file: string) => {
   if (!kind || !slug || !file) return "";
   const path = join(["assets", kind, slug, file]); // => /assets/kind/slug/file
-  if (process.env.NODE_ENV === "development") {
-    fetch(path)
+  // Dev env check
+  if (process.env.NODE_ENV === "development" && typeof window !== "undefined") {
+    fetch(path, { method: "HEAD" })
       .then((res) => {
         if (!res.ok) console.warn(`[Missing asset] ${path}`);
       })
-      .catch(() => console.warn(`[Asset check failed] ${path}`));
+      .catch(() => {}); // ignore unreachable paths in server context
   }
   return path;
 };
