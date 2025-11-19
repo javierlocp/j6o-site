@@ -1,5 +1,5 @@
 // app/rss.xml/route.js
-import { getAllPosts } from "@/lib/posts.server";
+import { getAllBlogPosts } from "@/lib/content/getBlogPosts.server";
 import { Feed } from "rss";
 
 export async function GET() {
@@ -16,7 +16,7 @@ export async function GET() {
     copyright: `© ${new Date().getFullYear()} Javier Lo`,
   });
 
-  const posts = getAllPosts();
+  const posts = getAllBlogPosts();
 
   posts.forEach((post) => {
     feed.addItem({
