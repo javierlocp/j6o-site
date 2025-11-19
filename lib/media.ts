@@ -1,5 +1,5 @@
 // This is a tiny path builder for public/assets/*
-type AssetKind = "posts" | "explorations";
+type AssetKind = "blog" | "explorations" | "case-studies";
 
 const join = (parts: string[]) =>
   "/" +
@@ -22,11 +22,14 @@ export const contentAsset = (kind: AssetKind, slug: string, file: string) => {
   return path;
 };
 
-export const postAsset = (slug: string, file: string) =>
-  contentAsset("posts", slug, file);
+export const blogAsset = (slug: string, file: string) =>
+  contentAsset("blog", slug, file);
 
 export const explorationAsset = (slug: string, file: string) =>
   contentAsset("explorations", slug, file);
+
+export const caseStudyAsset = (slug: string, file: string) =>
+  contentAsset("case-studies", slug, file);
 
 // Simple video detector
 export const isVideoSrc = (src: string) =>

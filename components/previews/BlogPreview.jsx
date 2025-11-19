@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { getAllPosts } from "@/lib/posts";
+import { getAllBlogPosts } from "@/lib/api/getBlogPosts.client";
 
 // This is a component to import most recent 4 posts and show it in Home Page.
 
@@ -9,7 +9,7 @@ const BlogPreview = () => {
 
   useEffect(() => {
     async function loadPosts() {
-      const allPosts = await getAllPosts();
+      const allPosts = await getAllBlogPosts();
       setPosts(allPosts.slice(0, 4));
     }
     loadPosts();

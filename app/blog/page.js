@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getAllPosts } from "@/lib/posts.server";
+import { getAllBlogPosts } from "@/lib/content/getBlogPosts.server";
 
 // Blog Index
 export const metadata = {
@@ -8,8 +8,8 @@ export const metadata = {
     "A collection of notes, code snippets, and loosely formed ideas on design, tech, and the process of figuring things out.",
 };
 
-export default function Blog() {
-  const posts = getAllPosts();
+export default async function Blog() {
+  const posts = await getAllBlogPosts();
 
   return (
     <>

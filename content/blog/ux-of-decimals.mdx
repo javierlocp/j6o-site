@@ -3,7 +3,7 @@ title: The UX of Decimals
 slug: ux-of-decimals
 date: 2025-09-05
 excerpt: A scalable approach to numerical clarity in finance and crypto
-image: /assets/posts/ux-of-decimals/cover.png
+image: /assets/blog/ux-of-decimals/cover.png
 tags: ["design", "process", "fragments", "finance", "crypto"]
 ---
 
@@ -19,13 +19,13 @@ In fact, most crypto assets trade in micro-values, and the ERC-20 token standard
 
 Most front-end engineers and designers (myself included) often opt for the simplest solution: truncating decimals dynamically with `js` or `css`. You’ve probably seen solutions like these online:
 
-![Example UI A vs B](/assets/posts/ux-of-decimals/ui-problems.png "Examples UI Comparison")
+![Example UI A vs B](/assets/blog/ux-of-decimals/ui-problems.png "Examples UI Comparison")
 
 **Option B introduces a problem:** while the ellipses (...) and the fiat value ($0.02) suggest there’s more to the user’s balance, the display can still mislead users.
 
 The issue becomes more serious when no fiat equivalent is available. Without the supporting context of a dollar value, the truncated display leaves users uncertain whether they hold any balance at all.
 
-![Example UI C](/assets/posts/ux-of-decimals/ui-problems-c.png "Examples UI C, Worse Case")
+![Example UI C](/assets/blog/ux-of-decimals/ui-problems-c.png "Examples UI C, Worse Case")
 
 When displaying crypto balances, the goal is to balance accuracy, readability, and trust. Here are two design rules to guide decimal display:
 
@@ -36,7 +36,7 @@ When displaying crypto balances, the goal is to balance accuracy, readability, a
 
 Minimum Significant Decimals refers to the smallest number of decimal places that still carries meaningful information for users. Defining and enforcing this rule helps cover most edge cases. If you don't know which minimum decimals to choose, you can fall back on the native token’s decimals and test different values.
 
-![Minimum Significant Decimals](/assets/posts/ux-of-decimals/min-sig-dec-rule.png "Minimum Significant Decimals Example")
+![Minimum Significant Decimals](/assets/blog/ux-of-decimals/min-sig-dec-rule.png "Minimum Significant Decimals Example")
 
 ### Always display a minimum number of decimals
 
@@ -58,7 +58,7 @@ While the Minimum Significant Decimals Rule ensures clarity by avoiding under/ov
 
 The idea is simple: as values increase, fewer decimals are needed to remain meaningful. Your UI should scale precision according to the value, ensuring users always see enough detail without being overwhelmed by noise.
 
-![Value-scaled](/assets/posts/ux-of-decimals/value-scaled-rule.png "Value-scaled Example")
+![Value-scaled](/assets/blog/ux-of-decimals/value-scaled-rule.png "Value-scaled Example")
 
 The example above follows these rules (adjust them as needed):
 
@@ -70,7 +70,7 @@ The example above follows these rules (adjust them as needed):
 
 While you can apply these rules to most of your UI, I wouldn’t recommend applying them to input fields. For example, in the Stake screen below. When a user interacts with the **MAX function**, it is recommended to display the token’s full default decimals.
 
-![Stake UI](/assets/posts/ux-of-decimals/stake-ui.png "Stake UI Example")
+![Stake UI](/assets/blog/ux-of-decimals/stake-ui.png "Stake UI Example")
 
 In this case, maximum accuracy matters more than readability.
 

@@ -32,7 +32,7 @@ export const explorations = [
     },
     slug: "doremi",
     wip: true, // WIP tag
-    visit: { href: "https://doremi-landing-ui.vercel.app/", label: "Visit" }, // With Visit Link
+    visit: { href: "https://doremi.finance/", label: "Beta" }, // With Visit Link
   },
   {
     title: "Custom Icons",

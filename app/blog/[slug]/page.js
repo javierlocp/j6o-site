@@ -1,5 +1,8 @@
 import { notFound } from "next/navigation";
-import { getAllPosts, getPostBySlug } from "@/lib/posts.server";
+import {
+  getAllBlogPosts,
+  getBlogPostBySlug,
+} from "@/lib/content/getBlogPosts.server";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
@@ -8,13 +11,13 @@ import "highlight.js/styles/github-dark.css"; // choose your preferred theme
 import BackButton from "@/components/primitives/BackButton";
 
 export async function generateStaticParams() {
-  const posts = getAllPosts();
+  const posts = getAllBlogPosts();
   return posts.map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = getBlogPostBySlug(slug);
 
   if (!post) {
     return {
@@ -57,7 +60,7 @@ export default async function BlogPost({ params }) {
   // ✅ Unwrap the promise
   const { slug } = await params;
 
-  const post = getPostBySlug(slug);
+  const post = getBlogPostBySlug(slug);
   if (!post) return notFound();
 
   return (

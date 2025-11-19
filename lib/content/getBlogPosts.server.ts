@@ -1,19 +1,21 @@
-// lib/posts.server.js
+// lib/content/getBlogPosts.server.ts
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 
-const postsDir = path.join(process.cwd(), "content", "posts");
+const blogDir = path.join(process.cwd(), "content", "blog");
 
-export const getPostBySlug = (slug: string) => {
-  const fullPath = path.join(postsDir, `${slug}.md`);
+/**
+ * Get a single blog post by slug
+ */
+export const getBlogPostBySlug = (slug: string) => {
+  const fullPath = path.join(blogDir, `${slug}.mdx`);
   if (!fs.existsSync(fullPath)) return null;
 
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  // calculate reading time
   const stats = readingTime(content);
 
   return {
@@ -28,18 +30,21 @@ export const getPostBySlug = (slug: string) => {
   };
 };
 
-export const getAllPosts = () => {
-  if (!fs.existsSync(postsDir)) return [];
-  const files = fs.readdirSync(postsDir);
+/**
+ * Get all published blog posts
+ */
+export const getAllBlogPosts = () => {
+  if (!fs.existsSync(blogDir)) return [];
+  const files = fs.readdirSync(blogDir);
 
   return files
-    .filter((f) => f.endsWith(".md"))
+    .filter((f) => f.endsWith(".mdx"))
     .map((filename) => {
-      const slug = filename.replace(/\.md$/, "");
-      const post = getPostBySlug(slug);
+      const slug = filename.replace(/\.mdx$/, "");
+      const post = getBlogPostBySlug(slug);
       return post;
     })
-    .filter((p) => p && !p.draft) // 🧠 hide drafts
+    .filter((p) => p && !p.draft)
     .sort((a, b) => {
       const dateA = new Date(a?.date ?? 0).getTime();
       const dateB = new Date(b?.date ?? 0).getTime();
