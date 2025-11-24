@@ -18,8 +18,8 @@ export default function Home() {
         <p>
           Currently taking a short break while exploring ideas for my next
           venture. Most recently, I led product design at{" "}
-          <ExternalLink href="https://haven1.org/">Haven1</ExternalLink>, a
-          blockchain built for safer DeFi. Previously at{" "}
+          <ExternalLink href="https://portal.haven1.org/">Haven1</ExternalLink>,
+          a blockchain built for safer DeFi. Previously at{" "}
           <ExternalLink href="https://agoda.com/">Agoda</ExternalLink>,{" "}
           <ExternalLink href="https://brankas.com/">Brankas</ExternalLink>,{" "}
           <ExternalLink href="https://says.com/">Says</ExternalLink> and Yield
