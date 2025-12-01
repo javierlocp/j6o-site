@@ -1,8 +1,7 @@
 // app/layout.tsx
 import "@/app/globals.css";
 import { inter, jetbrains } from "./fonts";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+
 import Script from "next/script";
 
 export const metadata = {
@@ -19,7 +18,7 @@ export const metadata = {
     },
   },
   openGraph: {
-    title: "Javier Lo - Product Design Leader & Builder",
+    title: "Javier Lo - Product Design Lead & Builder",
     description:
       "Digital product designer building tools, sharing thoughts, and working in public.",
     url: "https://javierlo.com",
@@ -28,7 +27,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Javier Lo - Product Design Leader & Builder",
+    title: "Javier Lo - Product Design Lead & Builder",
     description:
       "Digital product designer building tools, sharing thoughts, and working in public.",
     images: ["/showcase/ai/motion.png"],
@@ -75,12 +74,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://cloud.umami.is" />
         <link rel="dns-prefetch" href="https://cloud.umami.is" />
       </head>
-      <body
-        className={`${inter.variable} ${jetbrains.variable} antialiased mx-auto max-w-xl px-8 py-12 md:px-6`}
-      >
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+      <body className={`${inter.variable} ${jetbrains.variable} antialiased`}>
+        {children}
         <Script
           async
           defer

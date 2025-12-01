@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { getExplorations } from "@/content/explorations/data";
 import LightBoxModal from "@/components/modals/LightBoxModal";

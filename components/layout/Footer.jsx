@@ -3,7 +3,7 @@ import ExternalLink from "../primitives/ExternalLink";
 // This is written in arrow function
 const Footer = () => {
   return (
-    <footer className="mt-40">
+    <footer className="mt-40 mx-auto max-w-xl px-8 pb-12 md:px-6">
       <div className="mb-6 flex flex-col">
         <h2 className="mb-2 text-base text-gray-50">Colophon</h2>
         <div className="flex flex-col justify-between md:flex-row">

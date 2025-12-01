@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <header className="mb-22 flex items-center justify-between">
+    <header className="flex items-center justify-between mx-auto max-w-xl px-8 py-12 md:px-6">
       <div className="flex flex-col">
         <Link href="/" className="font-semibold text-neutral-50">
           Javier Lo

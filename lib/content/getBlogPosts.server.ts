@@ -4,13 +4,13 @@ import path from "node:path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 
-const blogDir = path.join(process.cwd(), "content", "blog");
+const BLOG_DIR = path.join(process.cwd(), "content", "blog");
 
 /**
  * Get a single blog post by slug
  */
 export const getBlogPostBySlug = (slug: string) => {
-  const fullPath = path.join(blogDir, `${slug}.mdx`);
+  const fullPath = path.join(BLOG_DIR, `${slug}.mdx`);
   if (!fs.existsSync(fullPath)) return null;
 
   const fileContents = fs.readFileSync(fullPath, "utf8");
@@ -34,8 +34,8 @@ export const getBlogPostBySlug = (slug: string) => {
  * Get all published blog posts
  */
 export const getAllBlogPosts = () => {
-  if (!fs.existsSync(blogDir)) return [];
-  const files = fs.readdirSync(blogDir);
+  if (!fs.existsSync(BLOG_DIR)) return [];
+  const files = fs.readdirSync(BLOG_DIR);
 
   return files
     .filter((f) => f.endsWith(".mdx"))
