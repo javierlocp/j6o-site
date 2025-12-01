@@ -145,10 +145,7 @@ export default function ExplorationsGrid() {
     <section aria-label="Project Preview" className="mb-20">
       <div className="mb-10 flex flex-col">
         <h2 className="mb-4 text-base text-neutral-50">Design & Exploration</h2>
-        <p>
-          Check out some of my side projects and design explorations below, or
-          get in touch if you'd like to read full case studies.
-        </p>
+        <p>Some of my side projects and explorations. Feel free to reach out if you want to chat or collaborate.</p>
       </div>
 
       {/* Project Gallery Grid */}
@@ -207,8 +204,7 @@ export default function ExplorationsGrid() {
         const current = thumbs[projectIndex];
         const media = getMediaList(current);
         const currentSrc = media[imageIndex] ?? "";
-        const mediaCount =
-          (current.images?.length ?? 0) + (current.videos ? 1 : 0); // count both image and video presence
+        const mediaCount = (current.images?.length ?? 0) + (current.videos ? 1 : 0); // count both image and video presence
         const hasMultipleMedia = mediaCount > 1;
 
         return (

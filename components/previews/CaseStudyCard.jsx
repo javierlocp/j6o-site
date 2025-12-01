@@ -11,6 +11,7 @@ export default function CaseStudyCard({ caseStudy, showHeading = true }) {
       {showHeading && (
         <div className="mb-10 flex flex-col">
           <h2 className="mb-4 text-base text-neutral-50">Selected Works</h2>
+          <p>A few of my recent case studies. More will be added soon.</p>
         </div>
       )}
 
