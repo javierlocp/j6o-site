@@ -25,8 +25,8 @@ export default function CaseStudyCard({ caseStudy, showHeading = true }) {
             <Image
               src={cover}
               alt={title}
-              width={1280}
-              height={985}
+              width={1440}
+              height={960}
               className="object-contain transition-transform duration-300 ease-out group-hover/thumbnail:scale-[1.02]"
             />
           ) : (
