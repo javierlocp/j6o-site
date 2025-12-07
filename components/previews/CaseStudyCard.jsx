@@ -27,6 +27,7 @@ export default function CaseStudyCard({ caseStudy, showHeading = true }) {
               alt={title}
               width={1440}
               height={960}
+              priority
               className="object-contain transition-transform duration-300 ease-out group-hover/thumbnail:scale-[1.02]"
             />
           ) : (
